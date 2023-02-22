@@ -5,14 +5,14 @@ import { IUpdateUser } from "./dto/update.user.dto";
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   findAll() {
     return this.prisma.user.findMany({});
   }
 
   findOne(id: string) {
-    return this.prisma.user.findUnique({ where: { id: id } });
+    return this.prisma.user.findUnique({ where: { id: id }, include: { announcements: true } });
   }
 
   create(registerData: IRegisterUser) {

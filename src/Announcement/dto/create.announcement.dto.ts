@@ -1,7 +1,4 @@
 export class IRegisterAnnouncement {
-    name: string;
-    email: string;
-    password: string;
     typeAd: string;
     title: string;
     year: string;

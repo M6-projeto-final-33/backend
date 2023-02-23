@@ -36,8 +36,8 @@ model Announcement {
   coverImg    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
 
   @@map("announcements")
 }

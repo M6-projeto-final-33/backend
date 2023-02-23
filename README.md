@@ -1,73 +1,205 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Motors shop API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+#### Motors shop é um projeto criado com o intuito de anunciar carros e motos para compra ou leilão, Cadastre-se e veja os veículos disponíveis!
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+### Endpoints:
+<b>URL base da API: https://motors-shop.herokuapp.com</b>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+## 🔹 **Rotas de Anúncios**
+### ▪️ Criação de um anúncio
 
-```bash
-$ yarn install
+> POST /announcements/ - FORMATO DA REQUISIÇÃO
+
+```JSON
+{
+	"typeAd": "sale",
+	"title": "Honda Civic",
+	"year": "2019",
+	"mileage": "10",
+	"price": 100000,
+	"description": "Honda Civic 2019 semi-usado para compra",
+	"vehicleType": "car",
+	"coverImg": "httm://honda.com/honda-civic-2019.jpg",
+	"userId": "21708575-7417-4a7c-af0b-37da30394c7a"
+}
 ```
 
-## Running the app
+Caso tudo dê certo, a resposta será assim:
 
-```bash
-# development
-$ yarn run start
+> POST /announcements/ - FORMATO DA RESPOSTA - STATUS 201
 
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+```JSON
+{
+	"id": "8365725-9772-4a7c-af0b-85jg8s03pas7"
+	"typeAd": "sale",
+	"title": "Honda Civic",
+	"year": "2019",
+	"mileage": "10",
+	"price": 100000,
+	"description": "Honda Civic 2019 semi-usado para compra",
+	"vehicleType": "car",
+	"coverImg": "httm://honda.com/honda-civic-2019.jpg",
+	"createdAt": "2023-02-22T21:59:45.839Z",
+	"updatedAt": "2023-02-22T21:59:45.839Z",
+	"userId": "21708575-7417-4a7c-af0b-37da30394c7a"
+}
 ```
 
-## Test
+### ⚠️ Possíveis Erros
 
-```bash
-# unit tests
-$ yarn run test
+> POST /announcements/ - FORMATO DA RESPOSTA - STATUS 400
 
-# e2e tests
-$ yarn run test:e2e
+Caso você esqueça de enviar algum campo, a resposta de erro será assim:
 
-# test coverage
-$ yarn run test:cov
+```JSON
+{
+  "message": "Required field is missing"
+}
 ```
 
-## Support
+> POST /announcements/ - FORMATO DA RESPOSTA - STATUS 400
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Caso alguma chave do corpo da requisição esteja errada, a resposta de erro será assim:
 
-## Stay in touch
+```JSON
+{
+  "message": "Invalid Key"
+}
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### ▪️ Listar Anúncios
 
-## License
+> GET /announcements/ - FORMATO DA REQUISIÇÃO
 
-Nest is [MIT licensed](LICENSE).
+```JSON
+No Body
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+> GET /announcements/ - FORMATO DA RESPOSTA - STATUS 200
+
+```JSON
+[
+	{
+		"id": "b3f3b174-7264-497d-9a3f-0e06a8724985",
+		"typeAd": "sale",
+		"title": "titulo",
+		"year": "2019",
+		"mileage": "10",
+		"price": 100000,
+		"description": "descricao",
+		"vehicleType": "car",
+		"coverImg": "url",
+		"createdAt": "2023-02-22T21:59:45.839Z",
+		"updatedAt": "2023-02-22T21:59:45.839Z",
+		"userId": "21708575-7417-4a7c-af0b-37da30394c7a"
+	},
+	{
+		"id": "13178514-073f-4c40-bc58-fa974c953c76",
+		"typeAd": "sale",
+		"title": "titulo",
+		"year": "2018",
+		"mileage": "10",
+		"price": 500000,
+		"description": "descricao",
+		"vehicleType": "car",
+		"coverImg": "url",
+		"createdAt": "2023-02-23T19:57:36.966Z",
+		"updatedAt": "2023-02-23T19:57:36.966Z",
+		"userId": null
+	}
+]
+```
+
+### ▪️ Atualização de um anúncio
+
+> PATCH /announcements/:announcementId - FORMATO DA REQUISIÇÃO
+
+```JSON
+{
+	"typeAd": "sale",
+	"title": "Honda Civic",
+	"year": "2019",
+	"mileage": "10",
+	"price": 100000,
+	"description": "Honda Civic 2019 semi-usado para compra",
+	"vehicleType": "car",
+	"coverImg": "httm://honda.com/honda-civic-2019.jpg",
+	"userId": "21708575-7417-4a7c-af0b-37da30394c7a"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+> PATCH /announcements/:announcementId - FORMATO DA RESPOSTA - STATUS 200
+
+```JSON
+{
+	"id": "8365725-9772-4a7c-af0b-85jg8s03pas7"
+	"typeAd": "sale",
+	"title": "Honda Civic",
+	"year": "2019",
+	"mileage": "10",
+	"price": 100000,
+	"description": "Honda Civic 2019 semi-usado para compra",
+	"vehicleType": "car",
+	"coverImg": "httm://honda.com/honda-civic-2019.jpg",
+	"createdAt": "2023-02-22T21:59:45.839Z",
+	"updatedAt": "2023-03-15T10:35:02.758Z",
+	"userId": "21708575-7417-4a7c-af0b-37da30394c7a"
+}
+```
+
+### ⚠️ Possíveis Erros
+
+> PATCH /announcements/:announcementId - FORMATO DA RESPOSTA - STATUS 400
+
+Caso alguma chave do corpo da requisição esteja errada, a resposta de erro será assim:
+
+```JSON
+{
+  "message": "Invalid Key"
+}
+```
+
+> PATCH /announcements/:announcementId - FORMATO DA RESPOSTA - STATUS 401
+
+Caso a API não encontre o anúncio, a resposta de erro será assim:
+
+```JSON
+{
+  "message": "Announcement not found"
+}
+```
+
+### ▪️ Deletar anúncio
+
+> DELETE /announcements/:announcementId - FORMATO DA REQUISIÇÃO
+
+```JSON
+No Body
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+> DELETE /announcements/:announcementId - FORMATO DA RESPOSTA - STATUS 204
+
+```JSON
+No Body
+```
+
+### ⚠️ Possíveis Erros
+
+> DELETE /announcements/:announcementId - FORMATO DA RESPOSTA - STATUS 401
+
+Caso a API não encontre o anúncio, a resposta de erro será assim:
+
+```JSON
+{
+  "message": "Announcement not found"
+}
+```

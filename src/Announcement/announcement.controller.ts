@@ -13,7 +13,7 @@ import { IUpdateAnnouncement } from "./dto/update.announcement.dto";
 
 @Controller("announcements")
 export class AnnoucementsController {
-  constructor(private announcementService: AnnouncementService) {}
+  constructor(private announcementService: AnnouncementService) { }
 
   @Post()
   create(@Body() createData: IRegisterAnnouncementData) {
@@ -23,6 +23,21 @@ export class AnnoucementsController {
   @Get()
   findAll() {
     return this.announcementService.findAll();
+  }
+
+  @Get("auctions")
+  findAuctions() {
+    return this.announcementService.findAuctions();
+  }
+
+  @Get("cars")
+  findCars() {
+    return this.announcementService.findCars();
+  }
+
+  @Get("motorbikes")
+  findMotorbikes() {
+    return this.announcementService.findMotorbikes();
   }
 
   @Get(":id")

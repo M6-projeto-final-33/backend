@@ -8,7 +8,7 @@ import {
   Delete,
 } from "@nestjs/common";
 import { AnnouncementService } from "./announcement.service";
-import { IRegisterAnnouncement } from "./dto/create.announcement.dto";
+import { IRegisterAnnouncement, IRegisterAnnouncementData } from "./dto/create.announcement.dto";
 import { IUpdateAnnouncement } from "./dto/update.announcement.dto";
 
 @Controller("announcements")
@@ -16,8 +16,8 @@ export class AnnoucementsController {
   constructor(private announcementService: AnnouncementService) {}
 
   @Post()
-  create(@Body() createData: IRegisterAnnouncement) {
-    return this.announcementService.create(createData);
+  create(@Body() createData: IRegisterAnnouncementData) {
+    return this.announcementService.create(createData)
   }
 
   @Get()

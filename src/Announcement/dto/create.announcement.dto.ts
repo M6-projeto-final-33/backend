@@ -31,13 +31,13 @@ export class IRegisterAnnouncement {
         Object.assign(this, obj)
     }
 
-    typeAd: string;
+    typeAd:  "sale" | "auction";
     title: string;
     year: string;
     mileage: string;
     price: number;
     description: string;
-    vehicleType: string;
+    vehicleType: "car" | "motorbike";
     coverImg: string;
     userId: never;
     isActive: boolean;

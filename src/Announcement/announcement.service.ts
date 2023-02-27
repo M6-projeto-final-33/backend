@@ -56,8 +56,6 @@ export class AnnouncementService {
   async create(registerAnnouncementData: IRegisterAnnouncementData) {
     const { adsImages, ...rest } = registerAnnouncementData
 
-    console.log(adsImages)
-
     const data = new IRegisterAnnouncement(rest)
     const announcement = await this.prisma.announcement.create({ data: data })
 

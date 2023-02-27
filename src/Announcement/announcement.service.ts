@@ -5,7 +5,7 @@ import { IUpdateAnnouncement } from "./dto/update.announcement.dto";
 
 @Injectable()
 export class AnnouncementService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   findAll() {
     return this.prisma.announcement.findMany({ include: { adsImages: true } })
@@ -18,10 +18,43 @@ export class AnnouncementService {
     });
   }
 
+  findAuctions() {
+    return this.prisma.announcement.findMany({
+      where: {
+        typeAd: "auction"
+      },
+      include: {
+        user: true
+      }
+    })
+  }
+
+  findCars() {
+    return this.prisma.announcement.findMany({
+      where: {
+        typeAd: "sale",
+        vehicleType: "car"
+      },
+      include: {
+        user: true
+      }
+    })
+  }
+
+  findMotorbikes() {
+    return this.prisma.announcement.findMany({
+      where: {
+        typeAd: "sale",
+        vehicleType: "motorbike"
+      },
+      include: {
+        user: true
+      }
+    })
+  }
+
   async create(registerAnnouncementData: IRegisterAnnouncementData) {
     const { adsImages, ...rest } = registerAnnouncementData
-
-    console.log(adsImages)
 
     const data = new IRegisterAnnouncement(rest)
     const announcement = await this.prisma.announcement.create({ data: data })

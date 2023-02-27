@@ -8,7 +8,7 @@ export interface IRegisterUserData {
   userType: "buyer" | "advertiser";
   password: string;
   userImage?: string;
-  isAdmin?: string;
+  isAdmin?: boolean;
   address: IRegisterAddressProps;
 }
 
@@ -22,7 +22,7 @@ export interface IRegisterUserProps {
   userType: "buyer" | "advertiser";
   password: string;
   userImage?: string;
-  isAdmin?: string;
+  isAdmin?: boolean;
 }
 
 export class IRegisterUser {
@@ -40,7 +40,7 @@ export class IRegisterUser {
   userType: "buyer" | "advertiser";
   password: string;
   userImage?: string;
-  isAdmin?: string;
+  isAdmin?: boolean;
 }
 
 export interface IRegisterAddressProps {

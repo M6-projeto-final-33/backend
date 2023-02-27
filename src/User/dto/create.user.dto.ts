@@ -65,3 +65,4 @@ export class IRegisterAddress {
   complement?: string;
   userId: string;
 }
+

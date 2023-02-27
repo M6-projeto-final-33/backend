@@ -72,7 +72,6 @@ export class AnnouncementService {
         announcementId: announcementId
       }
       const adImage = await this.prisma.adsImages.create({ data: adImageData })
-      console.log(adImage)
     }
   }
 
